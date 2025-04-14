@@ -1,17 +1,20 @@
 import os
 
-def create_files():
-    directory = "/sdcard/boostphere/"
-    files = ["FRAACCOUNT.txt", "FRAPAGES.txt", "RPWACCOUNT.txt"]
-    
-    # Ensure the directory exists
-    os.makedirs(directory, exist_ok=True)
-    
-    # Create files if they don't exist
-    for file in files:
-        with open(os.path.join(directory, file), 'a') as f:
-            pass  # Just ensures the file exists
+# Ask for user input
+data = input("Enter the account data to save: ")
 
-if __name__ == "__main__":
-    create_files()
-    print("Files created successfully!")
+# Target file path
+file_path = "/sdcard/boostphere/FRAACCOUNT.txt"
+
+try:
+    # Ensure the folder exists
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+
+    # Write (append) to the file
+    with open(file_path, "a") as f:
+        f.write(data + "\n")
+
+    print("✅ Data saved successfully.")
+
+except Exception as e:
+    print(f"❌ Failed to save data: {e}")
