@@ -1,20 +1,25 @@
 import os
 
-# Ask for user input
-data = input("Enter the account data to save: ")
+def main():
+    # Fixed target file
+    file_path = "/sdcard/boostphere/FRAACCOUNT.txt"
 
-# Target file path
-file_path = "/sdcard/boostphere/FRAACCOUNT.txt"
+    # Prompt user for the data to save
+    data = input("Enter (or paste) the account data to save: ").strip()
 
-try:
-    # Ensure the folder exists
-    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+    try:
+        # Make sure the parent directory exists
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
-    # Write (append) to the file
-    with open(file_path, "a") as f:
-        f.write(data + "\n")
+        # Open in append mode and write the data
+        with open(file_path, "a") as f:
+            f.write(data + "\n")
 
-    print("✅ Data saved successfully.")
+        print(f"✅ Data saved successfully to {file_path}")
 
-except Exception as e:
-    print(f"❌ Failed to save data: {e}")
+    except Exception as e:
+        print(f"❌ Failed to save data: {e}")
+
+if __name__ == "__main__":
+    # On Android/Termux you may need to run `termux-setup-storage` first
+    main()
